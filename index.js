@@ -33,6 +33,10 @@ function renderGrid (dimension) {
     }
 }
 
+function stopGame () {
+
+}
+
 function cellClickHandler (row, col) {
     const targetCell = findCell(row, col);
 
@@ -47,11 +51,11 @@ function cellClickHandler (row, col) {
 
     let win = haveWin();
     if (win !== EMPTY) {
-        alert(`Победил ${win}`)
+        alert(`Победил ${win}`);
     }
 
     if (isEndGame()) {
-        alert("Победила дружба")
+        alert("Победила дружба");
     }
 
 
@@ -145,6 +149,16 @@ function addResetListener () {
 }
 
 function resetClickHandler () {
+    for (let i = 0; i < field.length; i++) {
+        for (let j = 0; j < field[i].length; j++) {
+            const targetCell = findCell(i, j);
+            targetCell.textContent = EMPTY;
+        }
+    }
+    field = [
+    [EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY] ];
     console.log('reset!');
 }
 
