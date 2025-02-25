@@ -10,6 +10,7 @@ let field = [
     [EMPTY, EMPTY, EMPTY] ];
 
 let current = ZERO;
+let thereIsWinner = false;
 
 startGame();
 addResetListener();
@@ -33,14 +34,8 @@ function renderGrid (dimension) {
     }
 }
 
-function stopGame () {
-
-}
-
 function cellClickHandler (row, col) {
-    const targetCell = findCell(row, col);
-
-    if (targetCell.textContent !== EMPTY) {
+    if (thereIsWinner || findCell(row, col).textContent !== EMPTY) {
         return;
     }
 
@@ -52,6 +47,7 @@ function cellClickHandler (row, col) {
     let win = haveWin();
     if (win !== EMPTY) {
         alert(`Победил ${win}`);
+        thereIsWinner = true;
     }
 
     if (isEndGame()) {
@@ -155,10 +151,14 @@ function resetClickHandler () {
             targetCell.textContent = EMPTY;
         }
     }
+
     field = [
     [EMPTY, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY] ];
+
+    thereIsWinner = false;
+
     console.log('reset!');
 }
 
