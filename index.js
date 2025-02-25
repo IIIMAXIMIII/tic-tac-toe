@@ -75,25 +75,38 @@ function getTransponse() {
 }
 
 function haveWin () {
-    for (const row of field) {
-        if (row[0] === row[1] && row[1] === row[2]) {
-            return row[0]
+    for (let i = 0; i < field.length; i++) {
+        if (field[i][0] === field[i][1] && field[i][1] === field[i][2]) {
+            for (let j = 0; j < field[i].length; j++) {
+                findCell(i, j).style.color = '#FF0000';
+            }
+            return field[i][0]
         }
     }
 
     let transponseField = getTransponse();
 
-    for (const row of transponseField) {
-        if (row[0] === row[1] && row[1] === row[2]) {
-            return row[0]
+    for (let i = 0; i < transponseField.length; i++) {
+        if (transponseField[i][0] === transponseField[i][1]
+            && transponseField[i][1] === transponseField[i][2]) {
+            for (let j = 0; j < field[i].length; j++) {
+                findCell(j, i).style.color = '#FF0000';
+            }
+            return transponseField[i][0]
         }
     }
 
     if (field[0][0] === field[1][1] && field[1][1] === field[2][2]) {
+        for (let j = 0; j < field.length; j++) {
+            findCell(j, j).style.color = '#FF0000';
+        }
         return field[0][0]
     }
 
     if (field[0][2] === field[1][1] && field[1][1] === field[2][0]) {
+        for (let j = 0; j < field.length; j++) {
+            findCell(j, 2 - j).style.color = '#FF0000';
+        }
         return field[0][2]
     }
 
